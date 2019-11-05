@@ -10,13 +10,8 @@ namespace Week2Class1.Controllers
     {
         public JsonResult CheckNames(string username, string firstname, string lastname)
         {
-            if (String.IsNullOrWhiteSpace(username) ||
-                string.IsNullOrWhiteSpace(firstname) ||
-                string.IsNullOrWhiteSpace(lastname))
-            {
-                return Json(false);
-            }
-            if (username.Contains(firstname.ToLower()) || username.Contains(lastname.ToLower()))
+            bool result = ValidationClassLibrary.ValidationsHelper.CheckNames(username, firstname, lastname); 
+            if (result)
                 return Json("username cannot be derieved from the user's first or last name");
             else
                 return Json(true);
